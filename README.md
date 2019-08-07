@@ -1,4 +1,13 @@
 # image-recognition-tensorflow
 
-The images in this dataset are collected, used and provided under the [Creative commons fair usage policy](https://guides.library.stonybrook.edu/copyright). The intended usage is, for scientific research in the area of image recognition using artificial neural networks, by using the tensorflow and keras library.
-Source: https://github.com/ieee8023/deep-learning-datasets/tree/master/chihuahua-muffin
+## cature images to train data ##
+	* make capture name=robin_wang target=train_data count=5, or
+	* python python/capture2.py -n robin_wang -t train_data -c 5
+
+## cature images to test data ##
+	* make capture name=robin_wang target=test_data count=5, or
+	* python python/capture2.py -n robin_wang -t test_data -c 5
+
+##  train data ##
+	* make train, or
+	* python python/tf_john-matt.py
