@@ -111,6 +111,8 @@ print()
 print('train image shape:', train_images.shape)
 
 print('train label len:', len(train_labels))
+TrainLabelLength = len(train_labels)
+print('Confirmed train label len:', TrainLabelLength)
 
 print('train label:', train_labels)
 
@@ -131,8 +133,8 @@ sgd = keras.optimizers.SGD(lr=0.01, decay=1e-6, momentum=0.04, nesterov=True)
 model = keras.Sequential([
     keras.layers.Flatten(input_shape = ( maxsize_w, maxsize_h , 1)),
     keras.layers.Dense(128, activation=tf.nn.sigmoid),
-    keras.layers.Dense(16, activation=tf.nn.sigmoid),
-    keras.layers.Dense(2, activation=tf.nn.softmax)
+    keras.layers.Dense(46, activation=tf.nn.sigmoid),
+    keras.layers.Dense(TrainLabelLength, activation=tf.nn.softmax)
 ])
 
 
@@ -174,7 +176,7 @@ baseline_model = keras.models.Sequential([
         keras.layers.Dense(128, activation=tf.nn.sigmoid),
         keras.layers.Dropout(0.25),
         keras.layers.Dense(16, activation=tf.nn.sigmoid),
-        keras.layers.Dense(2, activation=tf.nn.softmax)
+        keras.layers.Dense(TrainLabelLength, activation=tf.nn.softmax)
     ])
 
 baseline_model.compile(optimizer=keras.optimizers.Adam(lr=0.001),
@@ -192,7 +194,7 @@ bigger_model = keras.models.Sequential([
         keras.layers.Dense(64, activation=tf.nn.relu),
         keras.layers.Dropout(0.5),
         keras.layers.Dense(16, activation=tf.nn.relu),
-        keras.layers.Dense(2, activation=tf.nn.softmax)
+        keras.layers.Dense(TrainLabelLength, activation=tf.nn.softmax)
     ])
 
 bigger_model1 = keras.models.Sequential([
@@ -202,7 +204,7 @@ bigger_model1 = keras.models.Sequential([
         keras.layers.Dense(64, activation=tf.nn.relu),
         keras.layers.Dropout(0.5),
         keras.layers.Dense(16, activation=tf.nn.relu),
-        keras.layers.Dense(2, activation=tf.nn.softmax)
+        keras.layers.Dense(TrainLabelLength, activation=tf.nn.softmax)
     ])
 
 bigger_model1.compile(optimizer=keras.optimizers.Adam(lr=0.001),
@@ -213,7 +215,7 @@ bigger_model1.compile(optimizer=keras.optimizers.Adam(lr=0.001),
 smaller_model1 = keras.models.Sequential([
         keras.layers.Flatten(input_shape = ( maxsize_w, maxsize_h , 1)),
          keras.layers.Dense(64, activation=tf.nn.relu),
-        keras.layers.Dense(2, activation=tf.nn.softmax)
+        keras.layers.Dense(TrainLabelLength, activation=tf.nn.softmax)
     ])
 
 smaller_model1.compile(optimizer='adam',
@@ -228,7 +230,7 @@ smaller_model = keras.models.Sequential([
         keras.layers.Dropout(0.25),
         keras.layers.Dense(128, activation=tf.nn.relu),
         keras.layers.Dense(16, activation=tf.nn.relu),
-        keras.layers.Dense(2, activation=tf.nn.softmax)
+        keras.layers.Dense(TrainLabelLength, activation=tf.nn.softmax)
     ])
 
 vgg_style_model = keras.models.Sequential([
@@ -243,7 +245,7 @@ vgg_style_model = keras.models.Sequential([
     keras.layers.Flatten(),
     keras.layers.Dense(128, activation='relu'),
     keras.layers.Dropout(0.5),
-    keras.layers.Dense(2, activation='softmax')
+    keras.layers.Dense(TrainLabelLength, activation='softmax')
     ])
 datagen = keras.preprocessing.image.ImageDataGenerator(
         #zoom_range=0.2, # randomly zoom into images
